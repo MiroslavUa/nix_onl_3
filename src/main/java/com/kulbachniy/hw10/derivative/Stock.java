@@ -6,14 +6,12 @@ import java.util.Objects;
 public class Stock extends Derivative {
     private String companyName;
     private String industry;
-    private long volume;
-    private long averageTrueRange;
+    private double volume;
+    private double averageTrueRange;
     private LocalDateTime date;
 
-    public Stock(){}
-
     public Stock(String ticker, DerivativeType type, Exchange exchange, double price,
-                 String companyName, String industry, long volume, long averageTrueRange, LocalDateTime date) {
+                 String companyName, String industry, double volume, double averageTrueRange, LocalDateTime date) {
         super(ticker, type, exchange, price);
         this.companyName = companyName;
         this.industry = industry;
@@ -37,7 +35,8 @@ public class Stock extends Derivative {
 
     @Override
     public String toString() {
-        return "Stock{" +
+        return "Stock{ ticker: " + super.getTicker() + '\'' +
+                "id: " + super.getId() + '\'' +
                 "companyName='" + companyName + '\'' +
                 ", industry='" + industry + '\'' +
                 ", volume=" + volume +

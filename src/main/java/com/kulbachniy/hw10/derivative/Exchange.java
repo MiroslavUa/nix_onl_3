@@ -8,16 +8,19 @@ public enum Exchange {
     LSE("l","London Stock Exchange"),
     FX("f","Foreign exchange market");
 
-    private String suffix;
-    private String fullName;
+    private final String suffix;
+    private final String fullName;
 
     private Exchange(String suffix, String fullName){
-
         this.suffix = suffix;
         this.fullName = fullName;
     }
 
     public String getFullName(){
         return fullName;
+    }
+
+    public String getSuffix() {
+        return suffix;
     }
 }
