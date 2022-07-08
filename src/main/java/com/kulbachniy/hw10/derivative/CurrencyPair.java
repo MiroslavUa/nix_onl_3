@@ -8,9 +8,9 @@ public class CurrencyPair extends Derivative{
     private String quoteCurrency;
     private LocalDateTime date;
 
-    public CurrencyPair(String ticker, DerivativeType type, Exchange exchange, double price,
+    public CurrencyPair(String ticker, Exchange exchange, double price,
                         String baseCurrency, String quoteCurrency, LocalDateTime date) {
-        super(ticker, type, exchange, price);
+        super(ticker, DerivativeType.CURRENCY_PAIR, exchange, price);
         this.baseCurrency = baseCurrency;
         this.quoteCurrency = quoteCurrency;
         this.date = date;

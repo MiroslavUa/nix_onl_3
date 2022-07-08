@@ -128,19 +128,6 @@ public class ProgramRun {
         System.out.print("Enter stock ticker: ");
         String ticker = reader.readLine().toUpperCase();
 
-        System.out.print("Choose type of derivatives: 1 - stock, 2 - futures, 3 - option, 4 - currency pair: ");
-        String typeName = reader.readLine();
-        DerivativeType type = null;
-        if (typeName.equals("1")){
-            type = DerivativeType.STOCK;
-        } else if (typeName.equals("2")) {
-            type = DerivativeType.FUTURES;
-        } else if (typeName.equals("3")) {
-            type = DerivativeType.OPTION;
-        } else if (typeName.equals("4")) {
-            type = DerivativeType.CURRENCY_PAIR;
-        }
-
         System.out.print("Choose exchange: 1 - nyse, 2 - nasdaq, 3 - amex, 4 - cme, 5 - lse, 6 - fx: ");
         String market = reader.readLine();
         Exchange exchange = null;
@@ -178,7 +165,7 @@ public class ProgramRun {
         //LocalDateTime date = LocalDateTime.parse(reader.readLine());
         LocalDateTime date = LocalDateTime.now();
 
-        Stock stock = new Stock(ticker, type, exchange, price, companyName, industry, volume, atr, date);
+        Stock stock = new Stock(ticker, exchange, price, companyName, industry, volume, atr, date);
         return stock;
     }
 }

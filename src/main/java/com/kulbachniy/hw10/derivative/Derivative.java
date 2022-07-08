@@ -4,13 +4,9 @@ import java.util.UUID;
 
 public abstract class Derivative {
     private String ticker;
-
     private DerivativeType type;
-
     private Exchange exchange;
-
     private Double price;
-
     private String id;
 
     protected Derivative(){}
