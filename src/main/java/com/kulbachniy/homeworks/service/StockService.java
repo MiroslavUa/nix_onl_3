@@ -1,19 +1,21 @@
-package com.kulbachniy.hw10.service;
+package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.hw10.derivative.Derivative;
-import com.kulbachniy.hw10.derivative.Stock;
-import com.kulbachniy.hw10.repository.StockRepository;
+import com.kulbachniy.homeworks.derivative.Derivative;
+import com.kulbachniy.homeworks.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class StockService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
     StockRepository stockRepository = StockRepository.getInstance();
 
-    public void create(Derivative stock){
-        stockRepository.create(stock);
+    public void save(Derivative stock){
+        stockRepository.save(stock);
     }
+
+    public void saveAll(List<Derivative> derivatives) {stockRepository.saveAll(derivatives);}
 
     public void update(Derivative stock){
         stockRepository.update(stock);

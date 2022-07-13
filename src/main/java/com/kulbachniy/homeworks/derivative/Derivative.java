@@ -1,4 +1,4 @@
-package com.kulbachniy.hw10.derivative;
+package com.kulbachniy.homeworks.derivative;
 
 import java.util.UUID;
 
@@ -45,6 +45,8 @@ public abstract class Derivative {
     public Double getPrice() {
         return price;
     }
+
+    public void setPrice(double price) {this.price = price;}
 
     public void setPrice(Double price) {
         this.price = price;

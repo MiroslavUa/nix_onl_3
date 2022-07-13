@@ -1,4 +1,4 @@
-package com.kulbachniy.hw10.derivative;
+package com.kulbachniy.homeworks.derivative;
 
 public enum Exchange {
     NYSE("n","New York Stock Exchange"),

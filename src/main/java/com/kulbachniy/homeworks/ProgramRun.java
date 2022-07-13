@@ -1,10 +1,9 @@
-package com.kulbachniy.hw10;
+package com.kulbachniy.homeworks;
 
-import com.kulbachniy.hw10.derivative.Derivative;
-import com.kulbachniy.hw10.derivative.DerivativeType;
-import com.kulbachniy.hw10.derivative.Exchange;
-import com.kulbachniy.hw10.derivative.Stock;
-import com.kulbachniy.hw10.service.StockService;
+import com.kulbachniy.homeworks.derivative.Derivative;
+import com.kulbachniy.homeworks.derivative.Exchange;
+import com.kulbachniy.homeworks.derivative.Stock;
+import com.kulbachniy.homeworks.service.StockService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class ProgramRun {
 
                 switch (choice) {
                     case "1" -> {
-                        create(reader);
+                        save(reader);
                         showMenu();
                     }
                     case "2" -> {
@@ -63,7 +62,7 @@ public class ProgramRun {
     }
 
     private static void showMenu(){
-        System.out.printf("%s","1 – Create derivative.");
+        System.out.printf("%s","1 – Save derivative.");
         System.out.printf("%30s","2 - Update derivative.");
         System.out.printf("%27s","3 — Delete derivative.");
         System.out.printf("%s","\n4 — Find derivative by ticker.");
@@ -73,9 +72,9 @@ public class ProgramRun {
         System.out.print("\nPlease, choose an operations: ");
     }
 
-    private static void create(BufferedReader reader) throws IOException {
+    private static void save(BufferedReader reader) throws IOException {
         Stock stock = newStock(reader);
-        stockService.create(stock);
+        stockService.save(stock);
     }
 
     private static void update(BufferedReader reader) throws IOException{
@@ -162,7 +161,6 @@ public class ProgramRun {
         double atr = Double.parseDouble(reader.readLine());
 
         System.out.print("Enter date: ");
-        //LocalDateTime date = LocalDateTime.parse(reader.readLine());
         LocalDateTime date = LocalDateTime.now();
 
         Stock stock = new Stock(ticker, exchange, price, companyName, industry, volume, atr, date);

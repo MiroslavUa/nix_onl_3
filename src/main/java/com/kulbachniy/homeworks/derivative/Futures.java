@@ -1,4 +1,4 @@
-package com.kulbachniy.hw10.derivative;
+package com.kulbachniy.homeworks.derivative;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

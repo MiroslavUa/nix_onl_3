@@ -1,10 +1,12 @@
-package com.kulbachniy.hw10.repository;
+package com.kulbachniy.homeworks.repository;
 
-import com.kulbachniy.hw10.derivative.Derivative;
+import com.kulbachniy.homeworks.derivative.Derivative;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +17,7 @@ public class StockRepository implements CrudRepository{
 
     private static StockRepository instance;
 
-    private StockRepository() {
+    public StockRepository() {
         System.out.println("Stock Repository have been created");
     }
 
@@ -28,12 +30,27 @@ public class StockRepository implements CrudRepository{
 
 
     @Override
-    public void create(Derivative derivative) {
+    public void save(Derivative derivative) {
         if(derivative == null){
-            LOGGER.info("derivative cannot be null value");
+            final IllegalArgumentException exception = new IllegalArgumentException("Derivative must not be a null");
+            LOGGER.error(exception.getMessage(), exception);
+            throw exception;
         } else {
-            LOGGER.info(derivative.getId() + " has been created");
-            stocks.add(derivative);
+            Derivative foundDerivative = findByTicker(derivative.getTicker());
+            if (foundDerivative == null) {
+                LOGGER.info(derivative.getId() + " has been created");
+                stocks.add(derivative);
+            } else {
+                LOGGER.info(derivative.getId() + " derivative already exists.");
+                update(derivative);
+            }
+        }
+    }
+
+    @Override
+    public void saveAll(List<Derivative> derivatives){
+        for (Derivative derivative : derivatives){
+            save(derivative);
         }
     }
 
@@ -90,5 +107,18 @@ public class StockRepository implements CrudRepository{
             return Collections.emptyList();
         }
         return stocks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StockRepository)) return false;
+        StockRepository that = (StockRepository) o;
+        return stocks.equals(that.stocks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stocks);
     }
 }
