@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -84,6 +85,15 @@ class StockRepositoryTest {
         Assertions.assertEquals(stocks.get(2).getId(), thirdStock.getId());
     }
 
+    @Test
+    void saveAll_hasNull(){
+        final List<Derivative> stocks = new ArrayList<>();
+        stocks.add(stock);
+        stocks.add(null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> target.saveAll(stocks));
+        final List<Derivative> added = target.getAll();
+        Assertions.assertEquals(1, added.size());
+    }
 
     @Test
     void update() {
@@ -108,6 +118,7 @@ class StockRepositoryTest {
         Assertions.assertEquals(price, stockToCompare.getPrice());
         Assertions.assertEquals(volume, stockToCompare.getVolume());
         Assertions.assertEquals(atr, stockToCompare.getAverageTrueRange());
+        Assertions.assertEquals(date, stockToCompare.getDate());
         Assertions.assertEquals(stock.getId(), stockToCompare.getId());
     }
 

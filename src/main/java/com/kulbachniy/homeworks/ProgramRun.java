@@ -3,6 +3,7 @@ package com.kulbachniy.homeworks;
 import com.kulbachniy.homeworks.derivative.Derivative;
 import com.kulbachniy.homeworks.derivative.Exchange;
 import com.kulbachniy.homeworks.derivative.Stock;
+import com.kulbachniy.homeworks.repository.StockRepository;
 import com.kulbachniy.homeworks.service.StockService;
 
 import java.io.BufferedReader;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProgramRun {
-    private static final StockService stockService = new StockService();
+    private static final StockService stockService = new StockService(StockRepository.getInstance());
 
     public static void run() {
         showMenu();

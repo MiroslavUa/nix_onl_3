@@ -8,6 +8,9 @@ public class Futures extends Derivative{
 
     private LocalDateTime expirationDate;
 
+    public Futures(String ticker){
+        super(ticker);
+    };
     public Futures(String ticker, Exchange exchange, double price,
                    String commodity, LocalDateTime expirationDate) {
         super(ticker, DerivativeType.FUTURES, exchange, price);

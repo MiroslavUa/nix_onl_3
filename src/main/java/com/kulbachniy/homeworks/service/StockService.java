@@ -1,6 +1,7 @@
 package com.kulbachniy.homeworks.service;
 
 import com.kulbachniy.homeworks.derivative.Derivative;
+import com.kulbachniy.homeworks.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,9 +10,14 @@ import java.util.List;
 
 public class StockService {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
-    StockRepository stockRepository = StockRepository.getInstance();
 
-    public void save(Derivative stock){
+    private final StockRepository stockRepository;
+
+    public StockService(StockRepository stockRepository){
+        this.stockRepository = stockRepository;
+    }
+
+    public void save(Derivative stock) {
         stockRepository.save(stock);
     }
 

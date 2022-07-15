@@ -10,6 +10,10 @@ public class Stock extends Derivative {
     private double averageTrueRange;
     private LocalDateTime date;
 
+    public Stock(String ticker){
+        super(ticker);
+    };
+
     public Stock(String ticker, Exchange exchange, double price,
                  String companyName, String industry, double volume, double averageTrueRange, LocalDateTime date) {
         super(ticker, DerivativeType.STOCK, exchange, price);

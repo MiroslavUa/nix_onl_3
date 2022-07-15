@@ -8,6 +8,10 @@ public class CurrencyPair extends Derivative{
     private String quoteCurrency;
     private LocalDateTime date;
 
+    public CurrencyPair(String ticker){
+        super(ticker);
+    };
+
     public CurrencyPair(String ticker, Exchange exchange, double price,
                         String baseCurrency, String quoteCurrency, LocalDateTime date) {
         super(ticker, DerivativeType.CURRENCY_PAIR, exchange, price);
