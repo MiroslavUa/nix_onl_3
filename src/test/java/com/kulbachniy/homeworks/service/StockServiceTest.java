@@ -22,12 +22,19 @@ class StockServiceTest {
     private StockService target;
     private StockRepository stockRepository;
 
+    private StockService targetSpy;
+    private StockRepository stockRepositorySpy;
+
     private Stock stock;
 
     @BeforeEach
     void setUp() {
         stockRepository = Mockito.mock(StockRepository.class);
         target = new StockService(stockRepository);
+
+        stockRepositorySpy = Mockito.spy(new StockRepository());
+        targetSpy = new StockService(stockRepositorySpy);
+
         stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
                 12345612.5, 12.5, LocalDateTime.now());
     }
@@ -85,6 +92,21 @@ class StockServiceTest {
         target.delete(id);
         ArgumentCaptor<Stock> argumentStock = ArgumentCaptor.forClass((Stock.class));
         Mockito.verify(stockRepository).delete(id);
+    }
+
+    @Test
+    void delete_realMock(){
+        target.save(stock);
+        Mockito.when(stockRepository.delete(stock.getId())).thenCallRealMethod();
+        assertEquals(0, target.getAll().size());
+    }
+
+    @Test
+    void delete_realSpy(){
+        targetSpy.save(stock);
+        targetSpy.delete(stock.getId());
+        Mockito.verify(stockRepositorySpy).delete(stock.getId());
+        assertNull(targetSpy.findById(stock.getId()));
     }
 
     @Test
