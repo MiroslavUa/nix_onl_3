@@ -10,6 +10,7 @@ public abstract class Derivative {
     private String id;
 
     protected Derivative(String ticker){
+        this.id = UUID.randomUUID().toString();
         this.ticker = ticker;
     }
     protected Derivative(String ticker, DerivativeType type, Exchange exchange, double price){
