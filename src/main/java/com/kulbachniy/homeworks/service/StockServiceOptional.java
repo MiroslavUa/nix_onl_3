@@ -2,6 +2,7 @@ package com.kulbachniy.homeworks.service;
 
 import com.kulbachniy.homeworks.derivative.Derivative;
 import com.kulbachniy.homeworks.derivative.DerivativeType;
+import com.kulbachniy.homeworks.derivative.Exchange;
 import com.kulbachniy.homeworks.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
 
@@ -23,17 +24,18 @@ public class StockServiceOptional {
         stockOptional.ifPresent(stockRepository::update);
     }
 
-    public void setDate_orElseNow(Stock stock, LocalDateTime date){
-        Optional<LocalDateTime> dateTime = Optional.ofNullable(date);
-        stock.setDate(dateTime.orElse(LocalDateTime.now()));
+    public void setExchange_orElse(Stock stock, Exchange name){
+        Optional<Exchange> exchange = Optional.ofNullable(name);
+        stock.setExchange(exchange.orElse(Exchange.NASDAQ));
+        stockRepository.update(stock);
     }
 
-    public void getDerivativeType_orElseGet(Stock stock) {
+    public DerivativeType getDerivativeType_orElseGet(Stock stock) {
         final Optional<DerivativeType> stockOptional = Optional.ofNullable(stock.getType());
-        DerivativeType type = stockOptional.orElseGet(() -> DerivativeType.STOCK);
+        return stockOptional.orElseGet(() -> DerivativeType.STOCK);
     }
 
-    public void updateIfPresent_orElseSave(Stock stock){
+    public void updateIfPresent_orElse(Stock stock){
         final Optional<Derivative> stockOptional = Optional.ofNullable(stockRepository.findByTicker(stock.getTicker()));
         stockOptional.ifPresentOrElse(stockRepository::update, () -> System.out.println("There is no "
                 + stock.getTicker() + " in repository. First create it") );
@@ -61,9 +63,9 @@ public class StockServiceOptional {
         stockOptional.ifPresent(stockRepository::save);
     }
 
-    public void defineVolatility(Stock stock){
+    public Optional<Stock> defineVolatility(Stock stock){
         final Optional<Stock> stockOptional = Optional.ofNullable(stock);
         Predicate<Stock> highVolatility = s -> { return s.getAverageTrueRange() > 5; };
-        final Optional<Stock> volatileStock = stockOptional.filter(highVolatility);
+        return stockOptional.filter(highVolatility);
     }
 }
