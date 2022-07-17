@@ -1,19 +1,17 @@
-package com.kulbachniy.hw10.derivative;
+package com.kulbachniy.homeworks.derivative;
 
 import java.util.UUID;
 
 public abstract class Derivative {
     private String ticker;
-
     private DerivativeType type;
-
     private Exchange exchange;
-
     private Double price;
-
     private String id;
 
-    protected Derivative(){}
+    protected Derivative(String ticker){
+        this.ticker = ticker;
+    }
     protected Derivative(String ticker, DerivativeType type, Exchange exchange, double price){
         this.id = UUID.randomUUID().toString();
         this.ticker = ticker;
@@ -49,6 +47,8 @@ public abstract class Derivative {
     public Double getPrice() {
         return price;
     }
+
+    public void setPrice(double price) {this.price = price;}
 
     public void setPrice(Double price) {
         this.price = price;

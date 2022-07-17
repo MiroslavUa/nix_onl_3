@@ -1,4 +1,4 @@
-package com.kulbachniy.hw10;
+package com.kulbachniy.homeworks;
 
 public class Main {
     public static void main(String[] args){
