@@ -31,7 +31,7 @@ class StockRepositoryTest {
     @Test
     void getInstance_repositoryExists() {
         StockRepository newRepository = StockRepository.getInstance();
-        Assertions.assertTrue(newRepository.equals(target));
+        Assertions.assertEquals(newRepository, target);
     }
 
     @Test
@@ -44,7 +44,7 @@ class StockRepositoryTest {
     @Test
     void save() {
         target.save(stock);
-        final List< Derivative> stocks =  target.getAll();
+        final List<Stock> stocks =  target.getAll();
         Assertions.assertEquals(1, stocks.size());
         Assertions.assertEquals(stocks.get(0).getId(), stock.getId());
     }
@@ -52,14 +52,14 @@ class StockRepositoryTest {
     @Test
     void saveNull() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> target.save(null));
-        final List<Derivative> resultList = target.getAll();
+        final List<Stock> resultList = target.getAll();
         Assertions.assertEquals(0, resultList.size());
     }
 
     @Test
     void saveAll_oneStock(){
         target.saveAll(Collections.singletonList(stock));
-        final  List<Derivative> stocks = target.getAll();
+        final  List<Stock> stocks = target.getAll();
         Assertions.assertEquals(1, stocks.size());
         Assertions.assertEquals(stocks.get(0).getId(), stock.getId());
     }
@@ -67,7 +67,7 @@ class StockRepositoryTest {
     @Test
     void saveAll_noStock(){
         target.saveAll(Collections.emptyList());
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(0, stocks.size());
     }
 
@@ -78,7 +78,7 @@ class StockRepositoryTest {
         final Stock thirdStock = new Stock("MSFT", Exchange.NASDAQ, 457.8,
                 "Microsoft", "Software - Infrastructure ", 34564356.89, 7.49, LocalDateTime.now());
         target.saveAll(List.of(stock, secondStock, thirdStock));
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(3, stocks.size());
         Assertions.assertEquals(stocks.get(0).getId(), stock.getId());
         Assertions.assertEquals(stocks.get(1).getId(), secondStock.getId());
@@ -87,11 +87,11 @@ class StockRepositoryTest {
 
     @Test
     void saveAll_hasNull(){
-        final List<Derivative> stocks = new ArrayList<>();
+        final List<Stock> stocks = new ArrayList<>();
         stocks.add(stock);
         stocks.add(null);
         Assertions.assertThrows(IllegalArgumentException.class, () -> target.saveAll(stocks));
-        final List<Derivative> added = target.getAll();
+        final List<Stock> added = target.getAll();
         Assertions.assertEquals(1, added.size());
     }
 
@@ -111,7 +111,7 @@ class StockRepositoryTest {
         final boolean isUpdated = target.update(stock);
         Assertions.assertTrue(isUpdated);
 
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(1, stocks.size());
 
         Stock stockToCompare = (Stock) stocks.get(0);
@@ -131,7 +131,7 @@ class StockRepositoryTest {
         final boolean isUpdated = target.update(absentStock);
         Assertions.assertFalse(isUpdated);
 
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(1, stocks.size());
         Assertions.assertEquals(stock.getId(), stocks.get(0).getId());
     }
@@ -141,7 +141,7 @@ class StockRepositoryTest {
         target.save(stock);
         final boolean isDeleted = target.delete(stock.getId());
         Assertions.assertTrue(isDeleted);
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(0, stocks.size());
     }
 
@@ -152,7 +152,7 @@ class StockRepositoryTest {
                 "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
         final boolean isDeleted = target.delete(absentStock.getId());
         Assertions.assertFalse(isDeleted);
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(1, stocks.size());
     }
 
@@ -195,13 +195,13 @@ class StockRepositoryTest {
         Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
                 "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
         target.save(otherStock);
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(2, stocks.size());
     }
 
     @Test
     void getAll_noStocks() {
-        final List<Derivative> stocks = target.getAll();
+        final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(0, stocks.size());
     }
 }

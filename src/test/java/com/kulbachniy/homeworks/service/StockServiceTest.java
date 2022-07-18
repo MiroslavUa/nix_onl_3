@@ -59,12 +59,12 @@ class StockServiceTest {
 
     @Test
     void saveAll() {
-        Derivative firstStock = (Derivative) stock;
-        Derivative secondStock = (Derivative) new Stock("LMT", Exchange.NYSE, 128.6,
+        Stock firstStock = stock;
+        Stock secondStock = new Stock("LMT", Exchange.NYSE, 128.6,
                 "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
-        List<Derivative> derivatives = List.of(firstStock, secondStock);
-        target.saveAll(derivatives);
-        Mockito.verify(stockRepository, times(1)).saveAll(derivatives);
+        List<Stock> stocks = List.of(firstStock, secondStock);
+        target.saveAll(stocks);
+        Mockito.verify(stockRepository, times(1)).saveAll(stocks);
     }
 
     @Test
@@ -115,7 +115,7 @@ class StockServiceTest {
     @Test
     void findByTicker() {
         target.save(stock);
-        Derivative otherStock = (Derivative) new Stock("LMT", Exchange.NYSE, 128.6,
+        Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
                 "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
         target.save(otherStock);
 
@@ -130,7 +130,7 @@ class StockServiceTest {
     @Test
     void findById() {
         target.save(stock);
-        Derivative otherStock = (Derivative) new Stock("LMT", Exchange.NYSE, 128.6,
+        Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
                 "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
         target.save(otherStock);
 

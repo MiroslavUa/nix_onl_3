@@ -120,7 +120,7 @@ public class ProgramRun {
     }
     private static void findAll(){
         System.out.println("All stocks:");
-        List<Derivative> stocks = stockService.getAll();
+        List<Stock> stocks = stockService.getAll();
         stocks.forEach(System.out::println);
     }
 

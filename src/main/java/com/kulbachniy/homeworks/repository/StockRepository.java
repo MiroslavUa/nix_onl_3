@@ -7,13 +7,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import com.kulbachniy.homeworks.derivative.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class StockRepository implements CrudRepository{
+public class StockRepository implements CrudRepository<Stock> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockRepository.class);
 
-    private final List<Derivative> stocks = new ArrayList<>();
+    private final List<Stock> stocks = new ArrayList<>();
 
     private static StockRepository instance;
 
@@ -30,37 +31,37 @@ public class StockRepository implements CrudRepository{
 
 
     @Override
-    public void save(Derivative derivative) {
-        if(derivative == null){
+    public void save(Stock stock) {
+        if(stock == null){
             final IllegalArgumentException exception = new IllegalArgumentException("Derivative must not be a null");
             LOGGER.error(exception.getMessage(), exception);
             throw exception;
         } else {
-            Derivative foundDerivative = findByTicker(derivative.getTicker());
-            if (foundDerivative == null) {
-                LOGGER.info(derivative.getId() + " has been created");
-                stocks.add(derivative);
+            Stock foundStock = findByTicker(stock.getTicker());
+            if (foundStock == null) {
+                LOGGER.info(stock.getId() + " has been created");
+                stocks.add(stock);
             } else {
-                LOGGER.info(derivative.getId() + " derivative already exists.");
-                update(derivative);
+                LOGGER.info(stock.getId() + " derivative already exists.");
+                update(stock);
             }
         }
     }
 
     @Override
-    public void saveAll(List<Derivative> derivatives){
-        for (Derivative derivative : derivatives){
-            save(derivative);
+    public void saveAll(List<Stock> stocks){
+        for (Stock stock : stocks){
+            save(stock);
         }
     }
 
     @Override
-    public boolean update(Derivative derivative) {
-        for(Derivative d: stocks){
-            if(d.getId().equals(derivative.getId())){
-                stocks.remove(d);
-                stocks.add(derivative);
-                LOGGER.info(d.getId() + " has been updated");
+    public boolean update(Stock stock) {
+        for(Stock s: stocks){
+            if(s.getId().equals(stock.getId())){
+                stocks.remove(s);
+                stocks.add(stock);
+                LOGGER.info(s.getId() + " has been updated");
                 return true;
             }
         }
@@ -69,10 +70,10 @@ public class StockRepository implements CrudRepository{
 
     @Override
     public boolean delete(String id) {
-        for(Derivative d: stocks){
-            if(d.getId().equals(id)){
-                stocks.remove(d);
-                LOGGER.info(d.getId() + " has been deleted");
+        for(Stock s: stocks){
+            if(s.getId().equals(id)){
+                stocks.remove(s);
+                LOGGER.info(s.getId() + " has been deleted");
                 return true;
             }
         }
@@ -80,29 +81,29 @@ public class StockRepository implements CrudRepository{
     }
 
     @Override
-    public Derivative findById(String id) {
-        Derivative derivative = null;
-        for(Derivative d: stocks){
-            if(d.getId().equals(id)){
-                derivative = d;
+    public Stock findById(String id) {
+        Stock stock = null;
+        for(Stock s: stocks){
+            if(s.getId().equals(id)){
+                stock = s;
             }
         }
-        return derivative;
+        return stock;
     }
 
     @Override
-    public Derivative findByTicker(String ticker) {
-        Derivative derivative = null;
-        for(Derivative d: stocks){
-            if(d.getTicker().equals(ticker)){
-                derivative = d;
+    public Stock findByTicker(String ticker) {
+        Stock stock = null;
+        for(Stock s: stocks){
+            if(s.getTicker().equals(ticker)){
+                stock = s;
             }
         }
-        return derivative;
+        return stock;
     }
 
     @Override
-    public List<Derivative> getAll() {
+    public List<Stock> getAll() {
         if (stocks.isEmpty()) {
             return Collections.emptyList();
         }
