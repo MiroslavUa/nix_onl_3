@@ -2,20 +2,21 @@ package com.kulbachniy.homeworks.repository;
 
 import com.kulbachniy.homeworks.derivative.Derivative;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface CrudRepository {
-    void save(Derivative derivative);
+public interface CrudRepository<T extends Derivative> {
+    void save(T derivative);
 
-    void saveAll(List<Derivative> derivatives);
+    void saveAll(List<T> derivatives);
 
-    boolean update(Derivative derivative);
+    boolean update(T derivative);
 
     boolean delete(String id);
 
-    Derivative findById(String id);
+    T findById(String id);
 
-    Derivative findByTicker(String ticker);
+    T findByTicker(String ticker);
 
-    List<Derivative> getAll();
+    List<T> getAll();
 }

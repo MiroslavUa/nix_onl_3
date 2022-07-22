@@ -1,6 +1,5 @@
 package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
 import com.kulbachniy.homeworks.derivative.DerivativeType;
 import com.kulbachniy.homeworks.derivative.Exchange;
 import com.kulbachniy.homeworks.derivative.Stock;
@@ -8,28 +7,26 @@ import com.kulbachniy.homeworks.repository.StockRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.times;
 
 class StockServiceOptionalTest {
 
     private StockServiceOptional target;
 
-    private StockRepository stockRepository;
+    private StockRepository repository;
 
     private Stock stock;
     private Stock otherStock;
 
     @BeforeEach
     void setUp() {
-       stockRepository = new StockRepository();
-       target = new StockServiceOptional(stockRepository);
+       repository = new StockRepository();
+
+       target = new StockServiceOptional(repository);
        stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
                 12345612.5, 12.5, LocalDateTime.now());
        otherStock = new Stock("LMT", Exchange.NYSE, 128.6,  "Lockheed Martin", "Aerospace Defense",
@@ -38,62 +35,62 @@ class StockServiceOptionalTest {
 
     @Test
     void update_ifPresent_present() {
-        stockRepository.save(stock);
-        Assertions.assertEquals(125.5, stockRepository.findByTicker(stock.getTicker()).getPrice());
+        repository.save(stock);
+        Assertions.assertEquals(125.5, repository.findByTicker(stock.getTicker()).getPrice());
 
         stock.setPrice(145.5);
         target.update_ifPresent("BA");
-        Assertions.assertEquals(145.5, stockRepository.findByTicker(stock.getTicker()).getPrice());
+        Assertions.assertEquals(145.5, repository.findByTicker(stock.getTicker()).getPrice());
     }
 
     @Test
     void update_ifPresent_absent() {
         stock.setPrice(145.5);
         target.update_ifPresent("BA");
-        Assertions.assertNull(stockRepository.findByTicker(stock.getTicker()));
+        Assertions.assertNull(repository.findByTicker(stock.getTicker()));
     }
 
     @Test
     void setExchange_orElse_withExchange() {
-        stockRepository.save(stock);
+        repository.save(stock);
         Exchange exchange = Exchange.AMEX;
         target.setExchange_orElse(stock, exchange);
-        Assertions.assertEquals(Exchange.AMEX, stockRepository.findByTicker(stock.getTicker()).getExchange());
+        Assertions.assertEquals(Exchange.AMEX, repository.findByTicker(stock.getTicker()).getExchange());
     }
 
     @Test
     void setExchange_orElse_noExchange() {
-        stockRepository.save(stock);
+        repository.save(stock);
         target.setExchange_orElse(stock, null);
-        Assertions.assertEquals(Exchange.NASDAQ, stockRepository.findByTicker(stock.getTicker()).getExchange());
+        Assertions.assertEquals(Exchange.NASDAQ, repository.findByTicker(stock.getTicker()).getExchange());
     }
 
     @Test
     void getDerivativeType_orElseGet_withType() {
-        stockRepository.save(stock);
+        repository.save(stock);
         Assertions.assertEquals(DerivativeType.STOCK, target.getDerivativeType_orElseGet(stock));
     }
 
     @Test
     void getDerivativeType_orElseGet_noType() {
-        stockRepository.save(stock);
+        repository.save(stock);
         stock.setType(null);
-        stockRepository.update(stock);
+        repository.update(stock);
         Assertions.assertEquals(DerivativeType.STOCK, target.getDerivativeType_orElseGet(stock));
     }
 
     @Test
     void updateIfPresent_orElse_stock() {
-        stockRepository.save(stock);
+        repository.save(stock);
         stock.setPrice(500);
         target.updateIfPresent_orElse(stock);
 
-        stockRepository.save(otherStock);
+        repository.save(otherStock);
         otherStock.setPrice(1000);
         target.updateIfPresent_orElse(otherStock);
 
-        Assertions.assertEquals(500, stockRepository.findByTicker("BA").getPrice());
-        Assertions.assertEquals(1000, stockRepository.findByTicker("LMT").getPrice());
+        Assertions.assertEquals(500, repository.findByTicker("BA").getPrice());
+        Assertions.assertEquals(1000, repository.findByTicker("LMT").getPrice());
     }
 
     @Test
@@ -107,35 +104,35 @@ class StockServiceOptionalTest {
 
     @Test
     void ifExistUpdate_orSaveEmpty_exist() {
-        stockRepository.save(stock);
-        Assertions.assertEquals(125.5, stockRepository.findByTicker("BA").getPrice());
+        repository.save(stock);
+        Assertions.assertEquals(125.5, repository.findByTicker("BA").getPrice());
         stock.setPrice(250.5);
         target.ifExistUpdate_orSaveEmpty(stock);
-        Assertions.assertEquals(250.5, stockRepository.findByTicker("BA").getPrice());
+        Assertions.assertEquals(250.5, repository.findByTicker("BA").getPrice());
     }
 
     @Test
     void ifExistUpdate_orSaveEmpty_absent() {
         stock.setPrice(250.5);
         target.ifExistUpdate_orSaveEmpty(stock);
-        Assertions.assertEquals("BA", stockRepository.findByTicker("BA").getTicker());
-        assertNull(stockRepository.findByTicker("BA").getPrice());
-        assertNull(stockRepository.findByTicker("BA").getExchange());
-        assertNull(stockRepository.findByTicker("BA").getType());
-        assertNull(stockRepository.findByTicker("BA").getPrice());
-        assertNotNull(stockRepository.findByTicker("BA").getId());
+        Assertions.assertEquals("BA", repository.findByTicker("BA").getTicker());
+        assertNull(repository.findByTicker("BA").getPrice());
+        assertNull(repository.findByTicker("BA").getExchange());
+        assertNull(repository.findByTicker("BA").getType());
+        assertNull(repository.findByTicker("BA").getPrice());
+        assertNotNull(repository.findByTicker("BA").getId());
     }
 
 
     @Test
     void printStockInfo_orElseThrowException_exist() throws IllegalArgumentException{
-        stockRepository.save(stock);
+        repository.save(stock);
         target.printStockInfo_orElseThrowException(stock);
     }
 
     @Test
     void printStockInfo_orElseThrowException_absent() throws IllegalArgumentException {
-        stockRepository.save(stock);
+        repository.save(stock);
         try{
         target.printStockInfo_orElseThrowException(otherStock);
         } catch (IllegalArgumentException ex){
@@ -150,16 +147,16 @@ class StockServiceOptionalTest {
 
         target.mapStringToStockAndSave(microsoft);
         target.mapStringToStockAndSave(generalDynamics);
-        assertNull(stockRepository.findByTicker(microsoft).getPrice());
-        assertNull(stockRepository.findByTicker(generalDynamics).getPrice());
-        Assertions.assertEquals(2, stockRepository.getAll().size());
+        assertNull(repository.findByTicker(microsoft).getPrice());
+        assertNull(repository.findByTicker(generalDynamics).getPrice());
+        Assertions.assertEquals(2, repository.getAll().size());
     }
 
     @Test
     void mapStringToStockAndSave_noTicker() {
         String microsoft = null;
         target.mapStringToStockAndSave(microsoft);
-        Assertions.assertEquals(0, stockRepository.getAll().size());
+        Assertions.assertEquals(0, repository.getAll().size());
     }
 
     @Test
