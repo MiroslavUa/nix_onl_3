@@ -1,4 +1,4 @@
-package com.kulbachniy.homeworks.derivative;
+package com.kulbachniy.homeworks.model.derivative;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -38,6 +38,7 @@ public class CurrencyPair extends Derivative{
         return "CurrencyPair{" +
                 "baseCurrency='" + baseCurrency + '\'' +
                 ", quoteCurrency='" + quoteCurrency + '\'' +
+                ", price='" + super.getPrice() + '\'' +
                 ", date=" + date +
                 '}';
     }

@@ -1,8 +1,8 @@
 package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.homeworks.derivative.DerivativeType;
-import com.kulbachniy.homeworks.derivative.Exchange;
-import com.kulbachniy.homeworks.derivative.Stock;
+import com.kulbachniy.homeworks.model.derivative.DerivativeType;
+import com.kulbachniy.homeworks.model.derivative.Exchange;
+import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

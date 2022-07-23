@@ -1,8 +1,9 @@
-package com.kulbachniy.homeworks.derivative;
+package com.kulbachniy.homeworks.model.derivative;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public abstract class Derivative {
+public abstract class Derivative{
     private String ticker;
     private DerivativeType type;
     private Exchange exchange;

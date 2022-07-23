@@ -1,6 +1,7 @@
 package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.homeworks.derivative.*;
+import com.kulbachniy.homeworks.model.derivative.*;
+import com.kulbachniy.homeworks.model.derivative.*;
 
 public class DerivativeFactory {
     private DerivativeFactory(){}

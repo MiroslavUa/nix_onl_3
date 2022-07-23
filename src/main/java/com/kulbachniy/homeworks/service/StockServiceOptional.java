@@ -1,9 +1,9 @@
 package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
-import com.kulbachniy.homeworks.derivative.DerivativeType;
-import com.kulbachniy.homeworks.derivative.Exchange;
-import com.kulbachniy.homeworks.derivative.Stock;
+import com.kulbachniy.homeworks.model.derivative.Derivative;
+import com.kulbachniy.homeworks.model.derivative.DerivativeType;
+import com.kulbachniy.homeworks.model.derivative.Exchange;
+import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
 
 import java.util.Optional;

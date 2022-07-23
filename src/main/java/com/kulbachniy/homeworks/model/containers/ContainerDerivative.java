@@ -1,6 +1,6 @@
-package com.kulbachniy.homeworks.repository;
+package com.kulbachniy.homeworks.model.containers;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
+import com.kulbachniy.homeworks.model.derivative.Derivative;
 
 import java.util.Objects;
 

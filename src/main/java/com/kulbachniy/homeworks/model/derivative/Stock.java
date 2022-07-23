@@ -1,4 +1,4 @@
-package com.kulbachniy.homeworks.derivative;
+package com.kulbachniy.homeworks.model.derivative;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -80,12 +80,14 @@ public class Stock extends Derivative {
     @Override
     public String toString() {
         return "Stock{ ticker: " + super.getTicker() + '\'' +
-                "id: " + super.getId() + '\'' +
-                "companyName='" + companyName + '\'' +
-                ", industry='" + industry + '\'' +
-                ", volume=" + volume +
-                ", averageTrueRange=" + averageTrueRange +
-                ", date=" + date +
+                ", exchange='" + super.getExchange() + '\'' +
+                "\t, companyName='" + companyName + '\'' +
+                "\t, industry='" + industry + '\'' +
+                "\t, price=" + super.getPrice() + '\'' +
+                "\t, volume=" + volume +
+                "\t, averageTrueRange=" + averageTrueRange +
+                "\tid: '" + super.getId() + '\'' +
+                "\t, date=" + date +
                 '}';
     }
 }
