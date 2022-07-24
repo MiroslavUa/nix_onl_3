@@ -1,13 +1,11 @@
 package com.kulbachniy.homeworks.repository;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import com.kulbachniy.homeworks.derivative.Stock;
+import com.kulbachniy.homeworks.model.derivative.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

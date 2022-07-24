@@ -1,8 +1,7 @@
 package com.kulbachniy.homeworks.repository;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
+import com.kulbachniy.homeworks.model.derivative.Derivative;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface CrudRepository<T extends Derivative> {

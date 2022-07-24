@@ -1,6 +1,6 @@
 package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
+import com.kulbachniy.homeworks.model.derivative.Derivative;
 import com.kulbachniy.homeworks.repository.CrudRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

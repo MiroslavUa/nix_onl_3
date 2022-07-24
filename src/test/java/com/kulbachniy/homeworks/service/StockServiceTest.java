@@ -1,24 +1,19 @@
 package com.kulbachniy.homeworks.service;
 
-import com.kulbachniy.homeworks.derivative.Derivative;
-import com.kulbachniy.homeworks.derivative.Exchange;
-import com.kulbachniy.homeworks.derivative.Stock;
+import com.kulbachniy.homeworks.model.derivative.Exchange;
+import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 
 class StockServiceTest {
 
