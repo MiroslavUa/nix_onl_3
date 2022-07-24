@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 public class LinkedDerivativeList extends AbstractDerivativeList {
 
@@ -172,35 +172,37 @@ public class LinkedDerivativeList extends AbstractDerivativeList {
     }
 
     @Override
-    public Derivative getDerivative(int index) throws IndexOutOfBoundsException {
+    public Optional<Derivative> getDerivative(int index) throws IndexOutOfBoundsException {
         if (index >= listSize || index < 0) {
             throw new IndexOutOfBoundsException("Index cannot be negative or greater than " + (listSize - 1));
         } else {
             Node tempNode = headNode;
             for (int i = 0; i < listSize; i++) {
                 if (i == index) {
-                    return tempNode.derivative;
+                    return Optional.of(tempNode.derivative);
                 } else {
                     tempNode = tempNode.nextNode;
                 }
             }
-            return null;
+            Optional<Derivative> op = Optional.empty();
+            return op;
         }
     }
 
-    public Derivative getByTransactionNumber(int number) throws IndexOutOfBoundsException {
+    public Optional<Derivative> getByTransactionNumber(int number) throws IndexOutOfBoundsException {
         if (number < 0) {
             throw new IndexOutOfBoundsException("Transaction number cannot be negative ");
         } else {
             Node tempNode = headNode;
             for (int i = 0; i < listSize; i++) {
                 if (number == tempNode.transactionNumber) {
-                    return tempNode.derivative;
+                    return Optional.of(tempNode.derivative);
                 } else {
                     tempNode = tempNode.nextNode;
                 }
             }
-            return null;
+            Optional<Derivative> op = Optional.empty();
+            return op;
         }
     }
 
@@ -221,7 +223,7 @@ public class LinkedDerivativeList extends AbstractDerivativeList {
 
     private LocalDateTime[] getAllDates() {
         if(listSize == 0) {
-            return null;
+            return new LocalDateTime[0];
         } else {
             LocalDateTime[] dates = new LocalDateTime[listSize];
             Node tempNode = headNode;
@@ -234,25 +236,22 @@ public class LinkedDerivativeList extends AbstractDerivativeList {
         }
     }
 
-    public LocalDateTime getDateOfFirstTransaction() {
+    public Optional<LocalDateTime> getDateOfFirstTransaction() {
        if(listSize == 0) {
-           return null;
+           Optional<LocalDateTime> op = Optional.empty();
+           return op;
        } else {
-           return Objects.requireNonNull(getAllDates())[0];
+           return Optional.of(getAllDates()[0]);
        }
     }
 
-    public LocalDateTime getDateOfLastTransaction() {
+    public Optional<LocalDateTime> getDateOfLastTransaction() {
         if(listSize == 0) {
-            return null;
+            Optional<LocalDateTime> op = Optional.empty();
+            return op;
         } else {
-            return Objects.requireNonNull(getAllDates())[listSize-1];
+            return Optional.of(getAllDates()[listSize-1]);
         }
-    }
-
-    @Override
-    public Stream<Derivative> getStream() {
-        return super.getStream();
     }
 
     @Override
@@ -263,7 +262,6 @@ public class LinkedDerivativeList extends AbstractDerivativeList {
         if (this.listSize != that.listSize) {
             return false;
         } else {
-            Node tempNode = headNode;
             for (int i = 0; i < this.listSize; i++) {
                 if (!this.getDerivative(i).equals(that.getDerivative(i))) {
                     return false;

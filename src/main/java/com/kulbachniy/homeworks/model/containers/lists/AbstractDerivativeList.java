@@ -3,9 +3,9 @@ package com.kulbachniy.homeworks.model.containers.lists;
 import com.kulbachniy.homeworks.model.derivative.Derivative;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public abstract  class AbstractDerivativeList implements Iterable<Derivative>{
@@ -16,12 +16,12 @@ public abstract  class AbstractDerivativeList implements Iterable<Derivative>{
 
     public abstract int size();
 
-    public abstract Derivative getDerivative(int index) throws IndexOutOfBoundsException;
+    public abstract Optional<Derivative> getDerivative(int index) throws IndexOutOfBoundsException;
 
     public Stream<Derivative> getStream() {
         Derivative[] temp = new Derivative[size()];
         for (int i = 0; i < this.size(); i++) {
-            temp[i] = this.getDerivative(i);
+            temp[i] = this.getDerivative(i).get();
         }
         return Arrays.stream(temp);
     }
