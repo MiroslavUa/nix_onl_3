@@ -24,7 +24,7 @@ public class DerivativeListIterator implements Iterator<Derivative> {
         if (currentIndex >= abstractDerivativeList.size()) {
             throw new NoSuchElementException("There is no such elements");
         }
-        Derivative derivative = abstractDerivativeList.getDerivative(currentIndex);
+        Derivative derivative = abstractDerivativeList.getDerivative(currentIndex).get();
         ++currentIndex;
         nextDerivative = true;
         return derivative;
@@ -35,7 +35,7 @@ public class DerivativeListIterator implements Iterator<Derivative> {
         if (!nextDerivative) {
             throw new IllegalStateException("It is necessary to call next() before removing!");
         } else {
-            abstractDerivativeList.remove(abstractDerivativeList.getDerivative(currentIndex-1));
+            abstractDerivativeList.remove(abstractDerivativeList.getDerivative(currentIndex-1).get());
             --currentIndex;
             nextDerivative = false;
         }

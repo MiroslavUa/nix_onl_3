@@ -3,6 +3,7 @@ package com.kulbachniy.homeworks.model.containers.lists;
 import com.kulbachniy.homeworks.model.derivative.Derivative;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ArrayDerivativeList extends AbstractDerivativeList{
@@ -66,16 +67,14 @@ public class ArrayDerivativeList extends AbstractDerivativeList{
     }
 
     private boolean decrease() {
-        if (listSize <= listElements * 2) {
-            return true;
-        } else {
+        if (listSize > listElements * 2) {
             int len = listSize;
             Derivative[] temporaryArray = derivativeList;
             listSize = (int) len / 2 + 1;
             derivativeList = new Derivative[listSize];
             System.arraycopy(temporaryArray, 0, derivativeList, 0, listElements);
-            return true;
         }
+        return true;
     }
 
     @Override
@@ -88,14 +87,15 @@ public class ArrayDerivativeList extends AbstractDerivativeList{
     }
 
     @Override
-    public Derivative getDerivative(int index) throws IndexOutOfBoundsException {
+    public Optional<Derivative> getDerivative(int index) throws IndexOutOfBoundsException {
         if (index >= listElements || index < 0) {
             throw new IndexOutOfBoundsException("Index cannot be greater than " + (listElements - 1));
         }
         if (derivativeList == null) {
-            return null;
+            Optional<Derivative> op = Optional.empty();
+            return op;
         } else {
-            return derivativeList[index];
+            return Optional.of(derivativeList[index]);
         }
     }
 
