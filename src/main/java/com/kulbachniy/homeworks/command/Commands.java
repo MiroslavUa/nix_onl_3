@@ -2,7 +2,7 @@ package com.kulbachniy.homeworks.command;
 
 public enum Commands {
     CREATE("Create derivative", new Create()),
-//    FIND("Find derivative by ticker", new Find()),
+    FIND("Find derivative by ticker", new Find()),
 //    FIND_ALL("Find all derivatives", new FindAll()),
 //    UPDATE("Update derivative info", new Update()),
 //    DELETE("Delete derivative by ticker", new Delete()),

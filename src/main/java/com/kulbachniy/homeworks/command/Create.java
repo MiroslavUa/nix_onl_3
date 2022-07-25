@@ -1,33 +1,45 @@
 package com.kulbachniy.homeworks.command;
 
 import com.kulbachniy.homeworks.model.derivative.DerivativeType;
+import com.kulbachniy.homeworks.model.derivative.Futures;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.service.DerivativeFactory;
 import com.kulbachniy.homeworks.service.DerivativeService;
+import com.kulbachniy.homeworks.service.FuturesService;
 import com.kulbachniy.homeworks.service.StockService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Create implements Command{
-    private static final DerivativeService<Stock> STOCK_DERIVATIVE_SERVICE = StockService.getInstance();
+    private static final DerivativeService<Stock> STOCK_SERVICE = StockService.getInstance();
+    private static final DerivativeService<Futures> FUTURES_SERVICE = FuturesService.getInstance();
 
     @Override
     public void execute() throws IOException {
-        System.out.println("Choose a derivative to be added:");
-        final DerivativeType[] types = DerivativeType.values();
-        final List<String> names = getNamesOfType(types);
-        final int type = UserInputUtil.intValue();
-        final String ticker = UserInputUtil.stringValue();
-        STOCK_DERIVATIVE_SERVICE.save((Stock) DerivativeFactory.createDerivative(types[type], ticker));
-    }
+        System.out.println("Choose type of derivative to be added.");
 
-    private List<String> getNamesOfType(final DerivativeType[] values){
-        final List<String> names = new ArrayList<>(values.length);
-        for(DerivativeType dt : values){
-            names.add(dt.name());
+        final DerivativeType[] values = DerivativeType.values();
+        final List<String> names = Arrays.stream(DerivativeType.values())
+                .map(Enum::name).toList();
+
+        final int input = UserInputUtil.chooseCommand(names);
+        switch  (values[input]){
+            case FUTURES -> {
+                System.out.println("Enter futures ticker: ");
+                String ticker = UserInputUtil.stringValue().toUpperCase();
+                Futures futures = new Futures(ticker);
+                FUTURES_SERVICE.save(futures);
+            }
+            case STOCK -> {
+                System.out.println("Enter stock ticker: ");
+                String ticker = UserInputUtil.stringValue().toUpperCase();
+                Stock stock = new Stock(ticker);
+                STOCK_SERVICE.save(stock);
+            }
         }
-        return names;
     }
 }

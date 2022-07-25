@@ -8,11 +8,11 @@ public class ProgramRun {
         boolean exit = false;
 
         while(!exit){
-            exit = choiceOfAction(values);
+            exit = userAction(values);
         }
     }
 
-    private static boolean choiceOfAction(final Commands[] values) throws IOException {
+    private static boolean userAction(final Commands[] values) throws IOException {
         int chosenCommand = -1;
         do {
             for (int i = 0; i < values.length; i++) {
