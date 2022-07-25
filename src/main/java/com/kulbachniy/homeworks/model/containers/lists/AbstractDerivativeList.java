@@ -44,9 +44,9 @@ public abstract  class AbstractDerivativeList implements Iterable<Derivative>{
                 }
             }
             if (this.size() != 0) {
-                return "List contains " + this.size() + " task(s). They are:\n " + builder;
+                return "List contains " + this.size() + " derivative(s). They are:\n " + builder;
             } else {
-                return "List contains " + this.size() + " task(s).";
+                return "List contains " + this.size() + " derivative(s).";
             }
         } else {
             return null;
