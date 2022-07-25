@@ -3,6 +3,7 @@ package com.kulbachniy.homeworks.model.containers.trees;
 import com.kulbachniy.homeworks.model.containers.DerivativeComparator;
 import com.kulbachniy.homeworks.model.derivative.Derivative;
 
+import java.util.Objects;
 import java.util.Stack;
 
 public class BinaryTree {
@@ -112,9 +113,25 @@ public class BinaryTree {
         if(node != null) {
             displayInfo(node.getLeft());
             displayInfo(node.getRight());
-            System.out.println("Ticker: " + node.toString() + "(" + node.getDerivative().getPrice() + ")");
+            System.out.print("Node: " + node.toString() + "(" + node.getDerivative().getPrice() + ")");
+
+            if(node.getLeft() != null) {
+                System.out.print(" – Left: " + node.getLeft().toString() + "(" + node.getLeft().getDerivative().getPrice() + ")");
+            } else {
+                System.out.print(" – ............");
+            }
+
+            if(node.getRight() != null) {
+                System.out.print(" – Right: " + node.getRight().toString() + "(" + node.getRight().getDerivative().getPrice() + ")");
+            } else {
+                System.out.print(" – ............");
+            }
+
+            if(!Objects.equals(node.getDerivative().getTicker(), root.getDerivative().getTicker())){
+                System.out.println();
+            }
+
         }
-        return;
     }
 
     public void printTreeInfo() {

@@ -48,10 +48,10 @@ public class Main {
         System.out.println("\nInfo on each elements: ");
         tree.printTreeInfo();
 
-        System.out.println("\nTotal price of left branch elements: ");
+        System.out.print("\n\nTotal price of left branch elements: ");
         System.out.println(tree.getSumLeftBranch());
 
-        System.out.println("Total price of right branch elements: ");
+        System.out.print("Total price of right branch elements: ");
         System.out.println(tree.getSumRightBranch());
     }
 }
