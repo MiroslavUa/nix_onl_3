@@ -9,12 +9,28 @@ public class Futures extends Derivative{
     private LocalDateTime expirationDate;
 
     public Futures(String ticker){
-        super(ticker);
+        super(ticker, DerivativeType.FUTURES);
     };
     public Futures(String ticker, Exchange exchange, double price,
                    String commodity, LocalDateTime expirationDate) {
         super(ticker, DerivativeType.FUTURES, exchange, price);
         this.commodity = commodity;
+        this.expirationDate = expirationDate;
+    }
+
+    public String getCommodity() {
+        return commodity;
+    }
+
+    public void setCommodity(String commodity) {
+        this.commodity = commodity;
+    }
+
+    public LocalDateTime getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDateTime expirationDate) {
         this.expirationDate = expirationDate;
     }
 
@@ -33,8 +49,8 @@ public class Futures extends Derivative{
 
     @Override
     public String toString() {
-        return "Futures{" +
-                "commodity='" + commodity + '\'' +
+        return "Futures{ ticker: " + super.getTicker() + '\'' +
+                ", commodity='" + commodity + '\'' +
                 ", expirationDate=" + expirationDate +
                 '}';
     }
