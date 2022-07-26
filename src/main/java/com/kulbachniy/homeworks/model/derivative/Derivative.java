@@ -11,9 +11,16 @@ public abstract class Derivative{
     private String id;
 
     protected Derivative(String ticker){
-        this.id = UUID.randomUUID().toString();
         this.ticker = ticker;
+        this.id = UUID.randomUUID().toString();
     }
+
+    protected Derivative(String ticker, DerivativeType type){
+        this.ticker = ticker;
+        this.type = type;
+        this.id = UUID.randomUUID().toString();
+    }
+
     protected Derivative(String ticker, DerivativeType type, Exchange exchange, double price){
         this.id = UUID.randomUUID().toString();
         this.ticker = ticker;
@@ -51,10 +58,6 @@ public abstract class Derivative{
     }
 
     public void setPrice(double price) {this.price = price;}
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 
     public String getId() {
         return id;

@@ -9,20 +9,20 @@ import com.kulbachniy.homeworks.service.FuturesService;
 import com.kulbachniy.homeworks.service.StockService;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.time.LocalDateTime;
 
-public class Find implements Command{
+public class Delete implements Command{
     private static final DerivativeService<Stock> STOCK_SERVICE = StockService.getInstance();
     private static final DerivativeService<Futures> FUTURES_SERVICE = FuturesService.getInstance();
 
     @Override
     public void execute() throws IOException {
-        System.out.println("Enter ticker to be found:");
+        System.out.println("Enter ticker to delete: ");
 
         final String input = UserInputUtil.stringValue().toUpperCase();
-        Derivative stock, futures, result;
+        Stock stock;
+        Futures futures;
+        Derivative result;
 
         stock = STOCK_SERVICE.findByTicker(input);
         futures = FUTURES_SERVICE.findByTicker(input);
@@ -35,10 +35,22 @@ public class Find implements Command{
             result = null;
         }
 
-        if (result != null) {
-            System.out.println(result);
-        } else {
+        DerivativeType type;
+        if(result == null) {
             System.out.println("There is no such ticker in repositories.");
+            return;
+        } else {
+            type = result.getType();
+        }
+
+        double val;
+        switch (type) {
+            case STOCK -> {
+                STOCK_SERVICE.delete(stock.getTicker());
+            }
+            case FUTURES -> {
+                FUTURES_SERVICE.delete(futures.getTicker());
+            }
         }
     }
 }

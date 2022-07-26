@@ -31,11 +31,11 @@ public abstract class DerivativeService<T extends Derivative> {
         repository.delete(id);
     }
 
-    public Derivative findByTicker(String ticker){
+    public T findByTicker(String ticker){
         return repository.findByTicker(ticker);
     }
 
-    public Derivative findById(String id) {
+    public T findById(String id) {
         return repository.findById(id);
     }
 

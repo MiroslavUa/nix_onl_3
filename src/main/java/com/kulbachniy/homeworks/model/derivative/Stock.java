@@ -11,7 +11,7 @@ public class Stock extends Derivative {
     private LocalDateTime date;
 
     public Stock(String ticker){
-        super(ticker);
+        super(ticker, DerivativeType.STOCK);
     };
 
     public Stock(String ticker, Exchange exchange, double price,
