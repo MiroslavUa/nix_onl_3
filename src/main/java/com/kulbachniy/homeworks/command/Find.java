@@ -9,9 +9,6 @@ import com.kulbachniy.homeworks.service.FuturesService;
 import com.kulbachniy.homeworks.service.StockService;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 
 public class Find implements Command{
     private static final DerivativeService<Stock> STOCK_SERVICE = StockService.getInstance();
@@ -22,7 +19,9 @@ public class Find implements Command{
         System.out.println("Enter ticker to be found:");
 
         final String input = UserInputUtil.stringValue().toUpperCase();
-        Derivative stock, futures, result;
+        Stock stock;
+        Futures futures;
+        Derivative result;
 
         stock = STOCK_SERVICE.findByTicker(input);
         futures = FUTURES_SERVICE.findByTicker(input);

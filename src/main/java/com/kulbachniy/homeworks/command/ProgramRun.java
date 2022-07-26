@@ -1,6 +1,7 @@
 package com.kulbachniy.homeworks.command;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 public class ProgramRun {
     public static void run() throws IOException {
@@ -15,13 +16,7 @@ public class ProgramRun {
     private static boolean userAction(final Commands[] values) throws IOException {
         int chosenCommand = -1;
         do {
-            for (int i = 0; i < values.length; i++) {
-                System.out.printf("%d) %s%n", i, values[i].getDescription());
-            }
-            int input = UserInputUtil.intValue();
-            if (input >= 0 && input < values.length) {
-                chosenCommand = input;
-            }
+            chosenCommand = UserInputUtil.chooseCommand(Arrays.stream(values).map(Commands::getDescription).toList());
         } while (chosenCommand == -1);
         final Command command = values[chosenCommand].getCommand();
         if (command == null) {

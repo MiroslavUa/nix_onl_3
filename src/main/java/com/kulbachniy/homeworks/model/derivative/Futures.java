@@ -49,8 +49,8 @@ public class Futures extends Derivative{
 
     @Override
     public String toString() {
-        return "Futures{" +
-                "commodity='" + commodity + '\'' +
+        return "Futures{ ticker: " + super.getTicker() + '\'' +
+                ", commodity='" + commodity + '\'' +
                 ", expirationDate=" + expirationDate +
                 '}';
     }
