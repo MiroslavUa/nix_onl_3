@@ -58,8 +58,6 @@ public class Main {
         Map<String, DerivativeType> map = STOCK_SERVICE_STREAM.toMap(stocks);
         map.forEach((k,v) -> System.out.println("Key:" + k + ", value: " + v));
 
-        //Добавить в один товар коллекцию деталей (например List<String> details), проверить среди всех товаров есть ли наличие конкретной детали
-
         //Получить статистику по цене всех товаров
         STOCK_SERVICE_STREAM.showPriceStatistics(stocks);
 
@@ -70,7 +68,6 @@ public class Main {
         System.out.print("\nDo all stocks have price (LMT has NO price): " + STOCK_SERVICE_STREAM.allHavePrice(stocks));
         stocks.remove(lmt);
         System.out.println("\nDo all stocks have price (LMT was removed): " + STOCK_SERVICE_STREAM.allHavePrice(stocks));
-
 
         //Написать реализацию Function которая принимает Map<String, Object> и создает конкретный продукт на основании полей Map
         HashMap<String, Object> stockInfo = new HashMap<>();
@@ -90,6 +87,7 @@ public class Main {
         STOCK_SERVICE_STREAM.sortNoDuplicates(stocks).stream()
                 .map(Derivative::getTicker).forEach(t -> System.out.print(t + " "));
 
+        //Добавить в один товар коллекцию деталей (например List<String> details), проверить среди всех товаров есть ли наличие конкретной детали
         List<String> production = new ArrayList<>() {
             { add("Apache Longbow"); add("AV-8B Harrier II"); add("B-52 StratoFortress"); add("McDonnell Douglas F-15 Eagle"); }
         };
@@ -100,8 +98,5 @@ public class Main {
         System.out.println("\nDoes any company of list produce F-22: " + hasModel);
         hasModel = STOCK_SERVICE_STREAM.produceModel(stocks, "Apache Longbow");
         System.out.println("Does any company of list produce Apache Longbow: " + hasModel);
-
-
-
     }
 }
