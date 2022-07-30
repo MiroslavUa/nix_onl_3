@@ -24,7 +24,7 @@ class StockRepositoryTest {
     void setUp() {
         target = new StockRepository();
         stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
-                12345612.5, 12.5, LocalDateTime.now());
+                12345612.5, 12.5, LocalDateTime.now(), production);
     }
 
     @Test
@@ -73,9 +73,9 @@ class StockRepositoryTest {
     @Test
     void saveAll_manyStocks(){
         final Stock secondStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
         final Stock thirdStock = new Stock("MSFT", Exchange.NASDAQ, 457.8,
-                "Microsoft", "Software - Infrastructure ", 34564356.89, 7.49, LocalDateTime.now());
+                "Microsoft", "Software - Infrastructure ", 34564356.89, 7.49, LocalDateTime.now(), production);
         target.saveAll(List.of(stock, secondStock, thirdStock));
         final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(3, stocks.size());
@@ -125,7 +125,7 @@ class StockRepositoryTest {
     void update_noStock() {
         target.save(stock);
         final Stock absentStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
 
         final boolean isUpdated = target.update(absentStock);
         Assertions.assertFalse(isUpdated);
@@ -148,7 +148,7 @@ class StockRepositoryTest {
     void delete_noStock() {
         target.save(stock);
         final Stock  absentStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
         final boolean isDeleted = target.delete(absentStock.getId());
         Assertions.assertFalse(isDeleted);
         final List<Stock> stocks = target.getAll();
@@ -192,7 +192,7 @@ class StockRepositoryTest {
     void getAll() {
         target.save(stock);
         Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
         target.save(otherStock);
         final List<Stock> stocks = target.getAll();
         Assertions.assertEquals(2, stocks.size());
