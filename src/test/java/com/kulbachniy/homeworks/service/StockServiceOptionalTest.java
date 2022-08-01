@@ -28,9 +28,9 @@ class StockServiceOptionalTest {
 
        target = new StockServiceOptional(repository);
        stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
-                12345612.5, 12.5, LocalDateTime.now());
+                12345612.5, 12.5, LocalDateTime.now(), production);
        otherStock = new Stock("LMT", Exchange.NYSE, 128.6,  "Lockheed Martin", "Aerospace Defense",
-               123654987.2, 14.8, LocalDateTime.now());
+               123654987.2, 14.8, LocalDateTime.now(), production);
     }
 
     @Test

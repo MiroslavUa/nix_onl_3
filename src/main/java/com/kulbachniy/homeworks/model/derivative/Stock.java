@@ -1,6 +1,7 @@
 package com.kulbachniy.homeworks.model.derivative;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 public class Stock extends Derivative {
@@ -9,19 +10,21 @@ public class Stock extends Derivative {
     private double volume;
     private double averageTrueRange;
     private LocalDateTime date;
+    private List<String> production;
 
     public Stock(String ticker){
         super(ticker, DerivativeType.STOCK);
     };
 
     public Stock(String ticker, Exchange exchange, double price,
-                 String companyName, String industry, double volume, double averageTrueRange, LocalDateTime date) {
+                 String companyName, String industry, double volume, double averageTrueRange, LocalDateTime date, List<String> production) {
         super(ticker, DerivativeType.STOCK, exchange, price);
         this.companyName = companyName;
         this.industry = industry;
         this.volume = volume;
         this.averageTrueRange = averageTrueRange;
         this.date = date;
+        this.production = production;
     }
 
     public String getCompanyName() {
@@ -62,6 +65,14 @@ public class Stock extends Derivative {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public List<String> getProduction() {
+        return production;
+    }
+
+    public void setProduction(List<String> production) {
+        this.production = production;
     }
 
     @Override

@@ -34,7 +34,7 @@ class StockServiceTest {
         targetSpy = new StockService(stockRepositorySpy);
 
         stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
-                12345612.5, 12.5, LocalDateTime.now());
+                12345612.5, 12.5, LocalDateTime.now(), production);
     }
 
     @Test
@@ -56,7 +56,7 @@ class StockServiceTest {
     void saveAll() {
         Stock firstStock = stock;
         Stock secondStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
         List<Stock> stocks = List.of(firstStock, secondStock);
         target.saveAll(stocks);
         Mockito.verify(stockRepository, times(1)).saveAll(stocks);
@@ -111,7 +111,7 @@ class StockServiceTest {
     void findByTicker() {
         target.save(stock);
         Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
         target.save(otherStock);
 
         Stock result = (Stock) target.findByTicker(otherStock.getTicker());
@@ -126,7 +126,7 @@ class StockServiceTest {
     void findById() {
         target.save(stock);
         Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now());
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
         target.save(otherStock);
 
         Stock result = (Stock) target.findById(otherStock.getId());
