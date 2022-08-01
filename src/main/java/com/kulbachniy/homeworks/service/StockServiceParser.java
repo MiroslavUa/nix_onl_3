@@ -45,7 +45,7 @@ public class StockServiceParser extends DerivativeService<Stock> {
                 (String) hashMap.get("Industry"),
                 (Double) hashMap.get("Volume"),
                 (Double) hashMap.get("ATR"),
-                (LocalDateTime) hashMap.get("Date"),
+                (LocalDateTime) hashMap.get("Time"),
                 (List<String>) hashMap.get("Production"));
     };
 

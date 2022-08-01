@@ -17,8 +17,10 @@ public class Main {
 
         Optional<Stock> lmt = PARSER.createStockFromJson(jsonFile);
         lmt.ifPresentOrElse(s -> System.out.println(s.getProduction().toString()), () -> System.out.println("Empty"));
+        lmt.ifPresentOrElse(s -> System.out.println(s.getDate().toString()), () -> System.out.println("Empty"));
 
         Optional<Stock> ba = PARSER.createStockFromXml(xmlFile);
         ba.ifPresentOrElse(s -> System.out.println(s.getProduction().toString()), () -> System.out.println("Empty"));
+        ba.ifPresentOrElse(s -> System.out.println(s.getDate().toString()), () -> System.out.println("Empty"));
     }
 }
