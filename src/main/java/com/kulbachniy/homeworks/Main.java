@@ -10,6 +10,7 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         //ProgramRun.run();
+
         final StockServiceParser PARSER = StockServiceParser.getInstance();
 
         String jsonFile = "src/main/resources/stock.json";
