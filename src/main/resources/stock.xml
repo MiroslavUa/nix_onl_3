@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<stock>
+    <ticker>BA</ticker>
+    <exchange>NYSE</exchange>
+    <price>121.0</price>
+    <company>Boeing Co.</company>
+    <industry>Aerospace Defense</industry>
+    <volume>158158158.0</volume>
+    <ATR>15.0</ATR>
+    <time>2022-07-01T09:00:00Z</time>
+    <production>
+        <model1>Apache Longbow</model1>
+        <model2>AV-8B Harrier II</model2>
+        <model3>B-52 StratoFortress</model3>
+        <model4>McDonnell Douglas F-15 Eagle</model4>
+        <model5>Boeing CH-47 Chinook</model5>
+    </production>
+</stock>
