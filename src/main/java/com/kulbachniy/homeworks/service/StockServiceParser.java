@@ -6,8 +6,11 @@ import com.kulbachniy.homeworks.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.Buffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -20,14 +23,10 @@ import java.util.regex.Pattern;
 public class StockServiceParser extends DerivativeService<Stock> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceParser.class);
 
-    private final StockRepository repository;
-
     private static StockServiceParser instance;
-
 
     public StockServiceParser(StockRepository repository){
         super(repository);
-        this.repository = repository;
     }
 
     public static StockServiceParser getInstance(){
@@ -36,8 +35,7 @@ public class StockServiceParser extends DerivativeService<Stock> {
         }
         return instance;
     }
-    private final Function<Map<String, Object>, Stock> createStock = hashMap -> {
-        return new Stock(
+    private final Function<Map<String, Object>, Stock> createStock = hashMap -> new Stock (
                 (String) hashMap.get("Ticker"),
                 (Exchange) hashMap.get("Exchange"),
                 (Double) hashMap.get("Price"),
@@ -47,77 +45,86 @@ public class StockServiceParser extends DerivativeService<Stock> {
                 (Double) hashMap.get("ATR"),
                 (LocalDateTime) hashMap.get("Time"),
                 (List<String>) hashMap.get("Production"));
-    };
 
     private Stock createStockFromMap(Map<String, Object> hashMap) {
         return createStock.apply(hashMap);
     }
 
-    private Optional<Stock> createStock(String path, String valueRegex, String keyRegex){
+    private Optional<Stock> createStock(String fileName, String valueRegex, String keyRegex){
         List<String> production = new ArrayList<>();
-
         Map<String, Object> hashMap = new HashMap<>();
         String foundValue;
         String foundKey = null;
 
-        try{
-            List<String> lines = Files.readAllLines(Paths.get(path));
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
 
-            for (String l : lines){
-                Pattern patternValue = Pattern.compile(valueRegex);
-                Matcher matcherValue = patternValue.matcher(l);
+        try(InputStream in = loader.getResourceAsStream(fileName)) {
+            assert in != null;
+            try(BufferedReader reader = new BufferedReader(new InputStreamReader(in))){
 
-                if(matcherValue.find()){
-                    foundValue = matcherValue.group(1);
+                List<String> lines = new ArrayList<>();
+                while(reader.ready()) {
+                    lines.add(reader.readLine());
+                }
 
-                    Pattern patternKey = Pattern.compile(keyRegex);
-                    Matcher matcherKey = patternKey.matcher(l);
-                    if(matcherKey.find()) {
-                        foundKey = matcherKey.group(1);
-                    }
+                for (String l : lines){
+                    Pattern patternValue = Pattern.compile(valueRegex);
+                    Matcher matcherValue = patternValue.matcher(l);
 
-                    switch (foundKey) {
-                        case "Ticker", "Company", "Industry" -> {
-                            hashMap.put(foundKey, foundValue);
+                    if(matcherValue.find()){
+                        foundValue = matcherValue.group(1);
+
+                        Pattern patternKey = Pattern.compile(keyRegex);
+                        Matcher matcherKey = patternKey.matcher(l);
+                        if(matcherKey.find()) {
+                            foundKey = matcherKey.group(1);
                         }
-                        case "Exchange" -> {
-                            hashMap.put(foundKey, Exchange.valueOf(foundValue.toUpperCase()));
+
+                        if (foundKey.contains("Price")) {
+                            foundKey = "Price";
                         }
-                        case "Price", "Volume", "ATR" -> {
-                            hashMap.put(foundKey, Double.parseDouble(foundValue));
-                        }
-                        case "Time" -> {
-                            hashMap.put(foundKey,
-                                    LocalDateTime.parse(foundValue, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")));
-                        }
-                        default -> {
-                            production.add(foundValue);
+
+                        switch (foundKey) {
+                            case "Ticker", "Company", "Industry" -> {
+                                hashMap.put(foundKey, foundValue);
+                            }
+                            case "Exchange" -> {
+                                hashMap.put(foundKey, Exchange.valueOf(foundValue.toUpperCase()));
+                            }
+                            case "Price", "Volume", "ATR" -> {
+                                hashMap.put(foundKey, Double.parseDouble(foundValue));
+                            }
+                            case "Time" -> {
+                                hashMap.put(foundKey,
+                                        LocalDateTime.parse(foundValue, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")));
+                            }
+                            default -> {
+                                production.add(foundValue);
+                            }
                         }
                     }
                 }
+
+                Stock stock = createStockFromMap(hashMap);
+                stock.setProduction(production);
+                return Optional.of(stock);
+
             }
-
-            Stock stock = createStockFromMap(hashMap);
-            stock.setProduction(production);
-            return Optional.of(stock);
-
         } catch (IOException ex){
             System.out.println(ex.getMessage());
             return Optional.empty();
         }
     }
 
-    public Optional<Stock> createStockFromJson(String path){
+    public Optional<Stock> createStockFromJson(String jsonFileName){
         String valueRegexJson = "\".+\": \"(.*?)\".*";
         String keyRegexJson = "\"(.*?)\".*";
-        return createStock(path, valueRegexJson, keyRegexJson);
+        return createStock(jsonFileName, valueRegexJson, keyRegexJson);
     }
 
-    public Optional<Stock> createStockFromXml(String path){
-        String valueRegexJson = ".*?>(.*?)<";
-        String keyRegexJson = "<(.*?)>.";
-        return createStock(path, valueRegexJson, keyRegexJson);
+    public Optional<Stock> createStockFromXml(String xmlFileName){
+        String valueRegexXml = ".*?>(.*?)<";
+        String keyRegexXml = "<(.*?)>.";
+        return createStock(xmlFileName, valueRegexXml, keyRegexXml);
     }
-
-
 }

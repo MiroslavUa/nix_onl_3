@@ -2,7 +2,7 @@
 <stock>
     <Ticker>BA</Ticker>
     <Exchange>NYSE</Exchange>
-    <Price>121.0</Price>
+    <Price currency="$">121.0</Price>
     <Company>Boeing Co.</Company>
     <Industry>Aerospace Defense</Industry>
     <Volume>158158158.0</Volume>

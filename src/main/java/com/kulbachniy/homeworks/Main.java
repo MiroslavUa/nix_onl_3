@@ -3,7 +3,7 @@ package com.kulbachniy.homeworks;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.service.StockServiceParser;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 
@@ -13,8 +13,8 @@ public class Main {
 
         final StockServiceParser PARSER = StockServiceParser.getInstance();
 
-        String jsonFile = "src/main/resources/stock.json";
-        String xmlFile = "src/main/resources/stock.xml";
+        String jsonFile = "stock.json";
+        String xmlFile = "stock.xml";
 
         Optional<Stock> lmt = PARSER.createStockFromJson(jsonFile);
         lmt.ifPresentOrElse(s -> System.out.println(s.getProduction().toString()), () -> System.out.println("Empty"));

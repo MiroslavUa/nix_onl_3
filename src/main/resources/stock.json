@@ -3,6 +3,7 @@
     "Ticker": "LMT",
     "Exchange": "NYSE",
     "Price": "152.0",
+    "Currency: ": "$",
     "Company": "Lockheed Martin",
     "Industry": "Aerospace Defense",
     "Volume": "158158158.0",
