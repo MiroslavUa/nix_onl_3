@@ -1,0 +1,22 @@
+[
+  {
+    "Ticker": "LMT",
+    "Exchange": "NYSE",
+    "Price": "152.0",
+    "Currency: ": "$",
+    "Company": "Lockheed Martin",
+    "Industry": "Aerospace Defense",
+    "Volume": "158158158.0",
+    "ATR": "15",
+    "Time": "2022-07-01T09:00:01Z",
+    "Production": {
+      "model1": "Lockheed F-117 Nighthawk",
+      "model2": "F-22 Raptor",
+      "model3": "F-35 Lightspeed",
+      "model4": "F-16 Fighting Falcon",
+      "model5": "AC-130 Spectre"
+    }
+  }
+]
+
+
