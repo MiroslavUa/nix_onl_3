@@ -1,6 +1,7 @@
 package com.kulbachniy.homeworks.command;
 
 import com.kulbachniy.homeworks.model.derivative.DerivativeType;
+import com.kulbachniy.homeworks.model.derivative.Exchange;
 import com.kulbachniy.homeworks.model.derivative.Futures;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.service.DerivativeFactory;
@@ -31,7 +32,14 @@ public class Create implements Command{
             case FUTURES -> {
                 System.out.println("Enter futures ticker: ");
                 String ticker = UserInputUtil.stringValue().toUpperCase();
-                Futures futures = new Futures(ticker);
+                System.out.println("Enter futures price: ");
+                double price = UserInputUtil.doubleValue();
+                Futures futures = new Futures.Builder()
+                        .setTicker(ticker)
+                        .setDerivativeType(DerivativeType.FUTURES)
+                        .setExchange(Exchange.CME)
+                        .setPrice(price)
+                        .build();
                 FUTURES_SERVICE.save(futures);
             }
             case STOCK -> {

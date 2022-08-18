@@ -18,11 +18,12 @@ class StockRepositoryTest {
     private StockRepository target;
     private Stock stock;
 
-    private String id;
+    private List<String> production;
 
     @BeforeEach
     void setUp() {
         target = new StockRepository();
+        production = List.of("Boeing 737", "Boeing 747", "Boeing 777", "Boeing 787");
         stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
                 12345612.5, 12.5, LocalDateTime.now(), production);
     }

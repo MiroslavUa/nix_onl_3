@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,12 +26,15 @@ class StockServiceOptionalTest {
     @BeforeEach
     void setUp() {
        repository = new StockRepository();
-
        target = new StockServiceOptional(repository);
+
+       List<String> boeingProducts = List.of("Boeing 737", "Boeing 747", "Boeing 777", "Boeing 787");
        stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
-                12345612.5, 12.5, LocalDateTime.now(), production);
+                12345612.5, 12.5, LocalDateTime.now(), boeingProducts);
+
+       List<String> lockheedProducts = List.of( "F-117", "SR-72", "AC-130", "F-22", "F-35");
        otherStock = new Stock("LMT", Exchange.NYSE, 128.6,  "Lockheed Martin", "Aerospace Defense",
-               123654987.2, 14.8, LocalDateTime.now(), production);
+               123654987.2, 14.8, LocalDateTime.now(), lockheedProducts);
     }
 
     @Test
@@ -118,7 +122,7 @@ class StockServiceOptionalTest {
         Assertions.assertEquals("BA", repository.findByTicker("BA").getTicker());
         assertNull(repository.findByTicker("BA").getPrice());
         assertNull(repository.findByTicker("BA").getExchange());
-        assertNull(repository.findByTicker("BA").getType());
+        assertEquals(DerivativeType.STOCK, repository.findByTicker("BA").getType());
         assertNull(repository.findByTicker("BA").getPrice());
         assertNotNull(repository.findByTicker("BA").getId());
     }
