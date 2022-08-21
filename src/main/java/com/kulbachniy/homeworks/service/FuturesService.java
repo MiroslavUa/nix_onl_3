@@ -19,6 +19,7 @@ public class FuturesService extends DerivativeService<Futures> {
     private FuturesService(FuturesRepository repository){
         super(repository);
         this.repository = repository;
+        LOGGER.info("FuturesService have been created");
     }
 
     public static FuturesService getInstance(){

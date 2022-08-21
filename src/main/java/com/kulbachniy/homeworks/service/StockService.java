@@ -21,6 +21,7 @@ public class StockService extends DerivativeService<Stock> {
     public StockService(StockRepository repository){
         super(repository);
         this.repository = repository;
+        LOGGER.info("StockService have been created");
     }
 
     public static StockService getInstance(){

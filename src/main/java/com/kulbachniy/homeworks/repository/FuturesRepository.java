@@ -19,9 +19,8 @@ public class FuturesRepository implements CrudRepository<Futures> {
 
     private static FuturesRepository instance;
 
-    @Autowired
     public FuturesRepository() {
-        System.out.println("Futures Repository have been created");
+        LOGGER.info("Futures Repository have been created");
     }
 
     public static FuturesRepository getInstance(){

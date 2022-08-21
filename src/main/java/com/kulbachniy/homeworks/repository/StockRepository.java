@@ -18,9 +18,8 @@ public class StockRepository implements CrudRepository<Stock> {
 
     private static StockRepository instance;
 
-    @Autowired
     public StockRepository() {
-        System.out.println("Stock Repository have been created");
+        LOGGER.info("Stock Repository have been created");
     }
 
     public static StockRepository getInstance(){

@@ -30,6 +30,7 @@ public class StockServiceParser extends DerivativeService<Stock> {
     @Autowired
     public StockServiceParser(StockRepository repository){
         super(repository);
+        LOGGER.info("StockServiceParser have been created");
     }
 
     public static StockServiceParser getInstance(){
