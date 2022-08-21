@@ -1,5 +1,7 @@
 package com.kulbachniy.homeworks.repository;
 
+import com.kulbachniy.homeworks.annotation.Autowired;
+import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Futures;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Singleton
 public class FuturesRepository implements CrudRepository<Futures> {
     private static final Logger LOGGER = LoggerFactory.getLogger(FuturesRepository.class);
 
@@ -16,6 +19,7 @@ public class FuturesRepository implements CrudRepository<Futures> {
 
     private static FuturesRepository instance;
 
+    @Autowired
     public FuturesRepository() {
         System.out.println("Futures Repository have been created");
     }

@@ -1,5 +1,6 @@
 package com.kulbachniy.homeworks.service;
 
+import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Derivative;
 import com.kulbachniy.homeworks.model.derivative.DerivativeType;
 import com.kulbachniy.homeworks.model.derivative.Exchange;
@@ -9,6 +10,7 @@ import com.kulbachniy.homeworks.repository.StockRepository;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
 
 public class StockServiceOptional {
     private final StockRepository stockRepository;
