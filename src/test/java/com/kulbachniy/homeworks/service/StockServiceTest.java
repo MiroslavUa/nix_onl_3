@@ -33,6 +33,7 @@ class StockServiceTest {
         stockRepositorySpy = Mockito.spy(new StockRepository());
         targetSpy = new StockService(stockRepositorySpy);
 
+        List<String> production = List.of("Boeing 737", "Boeing 747", "Boeing 777", "Boeing 787");
         stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
                 12345612.5, 12.5, LocalDateTime.now(), production);
     }
@@ -55,8 +56,10 @@ class StockServiceTest {
     @Test
     void saveAll() {
         Stock firstStock = stock;
+
+        List<String> lockheedProducts = List.of( "F-117", "SR-72", "AC-130", "F-22", "F-35");
         Stock secondStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), lockheedProducts);
         List<Stock> stocks = List.of(firstStock, secondStock);
         target.saveAll(stocks);
         Mockito.verify(stockRepository, times(1)).saveAll(stocks);
@@ -110,8 +113,10 @@ class StockServiceTest {
     @Test
     void findByTicker() {
         target.save(stock);
+
+        List<String> lockheedProducts = List.of( "F-117", "SR-72", "AC-130", "F-22", "F-35");
         Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), lockheedProducts);
         target.save(otherStock);
 
         Stock result = (Stock) target.findByTicker(otherStock.getTicker());
@@ -125,8 +130,10 @@ class StockServiceTest {
     @Test
     void findById() {
         target.save(stock);
+
+        List<String> lockheedProducts = List.of( "F-117", "SR-72", "AC-130", "F-22", "F-35");
         Stock otherStock = new Stock("LMT", Exchange.NYSE, 128.6,
-                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), production);
+                "Lockheed Martin", "Aerospace Defense", 123654987.2, 14.8,LocalDateTime.now(), lockheedProducts);
         target.save(otherStock);
 
         Stock result = (Stock) target.findById(otherStock.getId());
