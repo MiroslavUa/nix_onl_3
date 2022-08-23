@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+import com.kulbachniy.homeworks.annotation.Autowired;
+import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+@Singleton
 public class StockRepository implements CrudRepository<Stock> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockRepository.class);
 
@@ -17,7 +19,7 @@ public class StockRepository implements CrudRepository<Stock> {
     private static StockRepository instance;
 
     public StockRepository() {
-        System.out.println("Stock Repository have been created");
+        LOGGER.info("Stock Repository have been created");
     }
 
     public static StockRepository getInstance(){
@@ -119,5 +121,9 @@ public class StockRepository implements CrudRepository<Stock> {
     @Override
     public int hashCode() {
         return Objects.hash(stocks);
+    }
+
+    public static void resetInstance(){
+       instance = null;
     }
 }

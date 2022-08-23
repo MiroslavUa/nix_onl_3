@@ -22,7 +22,8 @@ class StockRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        target = new StockRepository();
+        StockRepository.resetInstance();
+        target = StockRepository.getInstance();
         production = List.of("Boeing 737", "Boeing 747", "Boeing 777", "Boeing 787");
         stock = new Stock("BA", Exchange.NYSE, 125.5, "Boeing", "Aerospace Defense",
                 12345612.5, 12.5, LocalDateTime.now(), production);

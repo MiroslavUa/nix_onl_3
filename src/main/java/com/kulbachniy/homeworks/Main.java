@@ -1,28 +1,23 @@
 package com.kulbachniy.homeworks;
 
-import com.kulbachniy.homeworks.command.ProgramRun;
-import com.kulbachniy.homeworks.model.derivative.Stock;
-import com.kulbachniy.homeworks.service.StockServiceParser;
-
+import com.kulbachniy.homeworks.annotation.Cash;
+import com.kulbachniy.homeworks.annotation.Singleton;
+import com.kulbachniy.homeworks.annotation.handler.AutowiredAnnotationHandler;
+import com.kulbachniy.homeworks.annotation.handler.SingletonAnnotationHandler;
 import java.io.*;
-import java.util.*;
-
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ProgramRun.run();
+        //ProgramRun.run();
 
-//        final StockServiceParser PARSER = StockServiceParser.getInstance();
-//
-//        String jsonFile = "stock.json";
-//        String xmlFile = "stock.xml";
-//
-//        Optional<Stock> lmt = PARSER.createStockFromJson(jsonFile);
-//        lmt.ifPresentOrElse(s -> System.out.println(s.getProduction().toString()), () -> System.out.println("Empty"));
-//        lmt.ifPresentOrElse(s -> System.out.println(s.getDate().toString()), () -> System.out.println("Empty"));
-//
-//        Optional<Stock> ba = PARSER.createStockFromXml(xmlFile);
-//        ba.ifPresentOrElse(s -> System.out.println(s.getProduction().toString()), () -> System.out.println("Empty"));
-//        ba.ifPresentOrElse(s -> System.out.println(s.getDate().toString()), () -> System.out.println("Empty"));
+        Cash cash;
+
+        cash = new SingletonAnnotationHandler();
+        cash.handle("com", Singleton.class);
+        System.out.println(Cash.classes.size());
+
+        cash = new AutowiredAnnotationHandler();
+        cash.handle("com", Singleton.class);
+        System.out.println(Cash.classes.size());
     }
 }

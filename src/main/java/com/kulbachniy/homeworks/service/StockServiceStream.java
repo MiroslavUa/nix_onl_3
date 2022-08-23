@@ -1,5 +1,7 @@
 package com.kulbachniy.homeworks.service;
 
+import com.kulbachniy.homeworks.annotation.Autowired;
+import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Derivative;
 import com.kulbachniy.homeworks.model.derivative.DerivativeType;
 import com.kulbachniy.homeworks.model.derivative.Exchange;
@@ -13,7 +15,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
+@Singleton
 public class StockServiceStream extends DerivativeService<Stock>{
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceStream.class);
 
@@ -21,10 +23,11 @@ public class StockServiceStream extends DerivativeService<Stock>{
 
     private static StockServiceStream instance;
 
-
+    @Autowired
     public StockServiceStream(StockRepository repository){
         super(repository);
         this.repository = repository;
+        LOGGER.info("StockServiceStream have been created");
     }
 
     public static StockServiceStream getInstance(){

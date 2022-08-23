@@ -24,8 +24,8 @@ class StockServiceOptionalTest {
     private Stock otherStock;
 
     @BeforeEach
-    void setUp() {
-       repository = new StockRepository();
+    void setUp() {StockRepository.resetInstance();
+       repository = StockRepository.getInstance();
        target = new StockServiceOptional(repository);
 
        List<String> boeingProducts = List.of("Boeing 737", "Boeing 747", "Boeing 777", "Boeing 787");

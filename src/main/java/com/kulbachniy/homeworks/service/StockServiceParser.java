@@ -1,5 +1,7 @@
 package com.kulbachniy.homeworks.service;
 
+import com.kulbachniy.homeworks.annotation.Autowired;
+import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Exchange;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
@@ -19,14 +21,16 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+@Singleton
 public class StockServiceParser extends DerivativeService<Stock> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceParser.class);
 
     private static StockServiceParser instance;
 
+    @Autowired
     public StockServiceParser(StockRepository repository){
         super(repository);
+        LOGGER.info("StockServiceParser have been created");
     }
 
     public static StockServiceParser getInstance(){
