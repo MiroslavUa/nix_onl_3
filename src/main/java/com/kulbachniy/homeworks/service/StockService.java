@@ -6,6 +6,7 @@ import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.CrudRepository;
 import com.kulbachniy.homeworks.repository.FuturesRepository;
 import com.kulbachniy.homeworks.repository.StockRepository;
+import com.kulbachniy.homeworks.repository.jdbc.StockRepositoryDb;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +14,12 @@ import org.slf4j.LoggerFactory;
 public class StockService extends DerivativeService<Stock> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockService.class);
 
-    private final StockRepository repository;
+    private final StockRepositoryDb repository;
 
     private static StockService instance;
 
     @Autowired
-    public StockService(StockRepository repository){
+    public StockService(StockRepositoryDb repository){
         super(repository);
         this.repository = repository;
         LOGGER.info("StockService have been created");
@@ -26,7 +27,7 @@ public class StockService extends DerivativeService<Stock> {
 
     public static StockService getInstance(){
         if(instance == null) {
-            instance = new StockService(StockRepository.getInstance());
+            instance = new StockService(StockRepositoryDb.getInstance());
         }
         return instance;
     }
