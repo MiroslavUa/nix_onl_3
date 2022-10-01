@@ -1,4 +1,4 @@
-package com.kulbachniy.homeworks.service;
+package com.kulbachniy.homeworks.service.crudservice;
 
 import com.kulbachniy.homeworks.model.derivative.Derivative;
 import com.kulbachniy.homeworks.repository.CrudRepository;

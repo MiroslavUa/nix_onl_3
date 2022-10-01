@@ -1,13 +1,9 @@
-package com.kulbachniy.homeworks.service;
+package com.kulbachniy.homeworks.service.crudservice;
 
 import com.kulbachniy.homeworks.annotation.Autowired;
 import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Stock;
-import com.kulbachniy.homeworks.repository.CrudRepository;
-import com.kulbachniy.homeworks.repository.FuturesRepository;
-import com.kulbachniy.homeworks.repository.StockRepository;
 import com.kulbachniy.homeworks.repository.jdbc.StockRepositoryDb;
-import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 @Singleton

@@ -1,4 +1,4 @@
-package com.kulbachniy.homeworks.service;
+package com.kulbachniy.homeworks.service.crudservice;
 
 import com.kulbachniy.homeworks.annotation.Autowired;
 import com.kulbachniy.homeworks.model.derivative.CurrencyPair;

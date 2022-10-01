@@ -2,8 +2,8 @@ package com.kulbachniy.homeworks.service;
 
 import com.kulbachniy.homeworks.model.derivative.Exchange;
 import com.kulbachniy.homeworks.model.derivative.Stock;
-import com.kulbachniy.homeworks.repository.StockRepository;
 import com.kulbachniy.homeworks.repository.jdbc.StockRepositoryDb;
+import com.kulbachniy.homeworks.service.crudservice.StockService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

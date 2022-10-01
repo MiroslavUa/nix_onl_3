@@ -1,10 +1,7 @@
-package com.kulbachniy.homeworks.service;
+package com.kulbachniy.homeworks.service.crudservice;
 
-import com.kulbachniy.homeworks.annotation.Autowired;
 import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Futures;
-import com.kulbachniy.homeworks.repository.CrudRepository;
-import com.kulbachniy.homeworks.repository.FuturesRepository;
 import com.kulbachniy.homeworks.repository.jdbc.FuturesRepositoryDb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

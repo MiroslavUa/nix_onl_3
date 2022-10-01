@@ -5,6 +5,7 @@ import com.kulbachniy.homeworks.annotation.Singleton;
 import com.kulbachniy.homeworks.model.derivative.Exchange;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
+import com.kulbachniy.homeworks.service.crudservice.DerivativeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +13,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
