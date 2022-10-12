@@ -3,7 +3,7 @@ package com.kulbachniy.homeworks.service;
 import com.kulbachniy.homeworks.model.derivative.*;
 import com.kulbachniy.homeworks.model.derivative.*;
 
-public class DerivativeFactory {
+public class  DerivativeFactory {
     private DerivativeFactory(){}
 
     public static Derivative createDerivative(DerivativeType type, String ticker, double price){

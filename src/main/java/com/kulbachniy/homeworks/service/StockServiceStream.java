@@ -7,6 +7,7 @@ import com.kulbachniy.homeworks.model.derivative.DerivativeType;
 import com.kulbachniy.homeworks.model.derivative.Exchange;
 import com.kulbachniy.homeworks.model.derivative.Stock;
 import com.kulbachniy.homeworks.repository.StockRepository;
+import com.kulbachniy.homeworks.service.crudservice.DerivativeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +17,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 @Singleton
-public class StockServiceStream extends DerivativeService<Stock>{
+public class StockServiceStream extends DerivativeService<Stock> {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockServiceStream.class);
 
     private final StockRepository repository;

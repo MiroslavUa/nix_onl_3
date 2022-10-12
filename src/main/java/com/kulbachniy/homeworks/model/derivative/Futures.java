@@ -9,7 +9,7 @@ public class Futures extends Derivative{
 
     private LocalDateTime expirationDate;
 
-    private Futures(String ticker, DerivativeType type, Exchange exchange, double price,
+    public Futures(String ticker, DerivativeType type, Exchange exchange, double price,
                    String commodity, LocalDateTime expirationDate) {
         super(ticker, type, exchange, price);
         this.commodity = commodity;

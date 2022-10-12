@@ -2,7 +2,8 @@ package com.kulbachniy.homeworks.service;
 
 import com.kulbachniy.homeworks.model.derivative.Exchange;
 import com.kulbachniy.homeworks.model.derivative.Stock;
-import com.kulbachniy.homeworks.repository.StockRepository;
+import com.kulbachniy.homeworks.repository.jdbc.StockRepositoryDb;
+import com.kulbachniy.homeworks.service.crudservice.StockService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,19 +19,19 @@ import static org.mockito.Mockito.times;
 class StockServiceTest {
 
     private StockService target;
-    private StockRepository stockRepository;
+    private StockRepositoryDb stockRepository;
 
     private StockService targetSpy;
-    private StockRepository stockRepositorySpy;
+    private StockRepositoryDb stockRepositorySpy;
 
     private Stock stock;
 
     @BeforeEach
     void setUp() {
-        stockRepository = Mockito.mock(StockRepository.class);
+        stockRepository = Mockito.mock(StockRepositoryDb.class);
         target = new StockService(stockRepository);
 
-        stockRepositorySpy = Mockito.spy(new StockRepository());
+        stockRepositorySpy = Mockito.spy(StockRepositoryDb.getInstance());
         targetSpy = new StockService(stockRepositorySpy);
 
         List<String> production = List.of("Boeing 737", "Boeing 747", "Boeing 777", "Boeing 787");

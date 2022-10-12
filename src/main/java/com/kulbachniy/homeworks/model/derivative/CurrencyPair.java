@@ -8,7 +8,7 @@ public class CurrencyPair extends Derivative{
     private String quoteCurrency;
     private LocalDateTime date;
 
-    private CurrencyPair(String ticker, DerivativeType type,Exchange exchange, double price,
+    public CurrencyPair(String ticker, DerivativeType type,Exchange exchange, double price,
                         String baseCurrency, String quoteCurrency, LocalDateTime date) {
         super(ticker, type, exchange, price);
         this.baseCurrency = baseCurrency;
@@ -87,6 +87,30 @@ public class CurrencyPair extends Derivative{
 
             return new CurrencyPair(ticker, type, exchange, price, baseCurrency, quoteCurrency, date);
         }
+    }
+
+    public String getBaseCurrency() {
+        return baseCurrency;
+    }
+
+    public void setBaseCurrency(String baseCurrency) {
+        this.baseCurrency = baseCurrency;
+    }
+
+    public String getQuoteCurrency() {
+        return quoteCurrency;
+    }
+
+    public void setQuoteCurrency(String quoteCurrency) {
+        this.quoteCurrency = quoteCurrency;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 
     @Override
